@@ -1,0 +1,19 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+  "name": "ottbot-central-relay-client",
+  "runArgs": [
+    "--name", "ottbot-central-relay-client-container"
+  ],
+
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "remoteUser": "node",
+
+  "customizations": {
+    "jetbrains": {
+      "backend": "IntelliJ"
+    }
+  }
+}
