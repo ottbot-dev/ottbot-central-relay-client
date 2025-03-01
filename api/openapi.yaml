@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- description: production server
+  url: https://central-relay.ottbot.dev
+paths:
+  /data/users/me:
+    get:
+      operationId: getMe
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserMeView'
+          description: OK
+      tags:
+      - me-controller
+      x-accepts:
+      - '*/*'
+  /data/release/{ottBotService}/{channel}:
+    get:
+      operationId: getReleaseVersion
+      parameters:
+      - explode: false
+        in: path
+        name: ottBotService
+        required: true
+        schema:
+          enum:
+          - ENGINE_SERVER
+          - CONFIG_SERVER
+          - HEADSET_APP
+          - ANDROID_APP
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: channel
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OttbotReleaseView'
+          description: OK
+      tags:
+      - ottbot-release-controller
+      x-accepts:
+      - '*/*'
+  /data/release/{id}:
+    get:
+      operationId: getRelease
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OttbotReleaseView'
+          description: OK
+      tags:
+      - ottbot-release-controller
+      x-accepts:
+      - '*/*'
+components:
+  schemas:
+    UserMeView:
+      example:
+        lastLogin: 2000-01-23T04:56:07.000+00:00
+        displayName: displayName
+        roles:
+        - ADMIN
+        - ADMIN
+        createdOn: 2000-01-23T04:56:07.000+00:00
+        username: username
+      properties:
+        username:
+          type: string
+        displayName:
+          type: string
+        roles:
+          items:
+            enum:
+            - ADMIN
+            - USER
+            type: string
+          type: array
+        createdOn:
+          format: date-time
+          type: string
+        lastLogin:
+          format: date-time
+          type: string
+    OttbotReleaseView:
+      example:
+        releaseChannel: releaseChannel
+        service: ENGINE_SERVER
+        name: name
+        downloadUrl: downloadUrl
+        description: description
+        id: id
+        version: version
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        service:
+          enum:
+          - ENGINE_SERVER
+          - CONFIG_SERVER
+          - HEADSET_APP
+          - ANDROID_APP
+          type: string
+        downloadUrl:
+          type: string
+        releaseChannel:
+          type: string
+
