@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.10.0",
+    "generators": {
+      "central-relay-api": {
+        "generatorName": "java",
+        "output": "#{cwd}/",
+        "glob": "api/openapi.yaml",
+        "additionalProperties": {
+          "groupId": "dev.ottbot",
+          "artifactId": "ottbot-central-relay-client",
+          "apiPackage": "dev.ottbot.centralrelay.client",
+          "modelPackage": "dev.ottbot.centralrelay.model",
+          "serializationLibrary": "jackson",
+          "library": "feign"
+        }
+      }
+    }
+  }
+}
