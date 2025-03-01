@@ -1,0 +1,21 @@
+name: Clean Up Old Packages
+
+on:
+  schedule:
+    # Run every Sunday at midnight UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  cleanup-packages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'dev.ottbot.ottbot-central-relay-client'
+          package-type: 'maven'
+          min-versions-to-keep: 5
