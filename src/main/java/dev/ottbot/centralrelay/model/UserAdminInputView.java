@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,20 +27,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * UserMeView
+ * UserAdminInputView
  */
 @JsonPropertyOrder({
-  UserMeView.JSON_PROPERTY_USERNAME,
-  UserMeView.JSON_PROPERTY_DISPLAY_NAME,
-  UserMeView.JSON_PROPERTY_ROLES,
-  UserMeView.JSON_PROPERTY_CREATED_ON,
-  UserMeView.JSON_PROPERTY_LAST_LOGIN
+  UserAdminInputView.JSON_PROPERTY_USERNAME,
+  UserAdminInputView.JSON_PROPERTY_PASSWORD,
+  UserAdminInputView.JSON_PROPERTY_DISPLAY_NAME,
+  UserAdminInputView.JSON_PROPERTY_ROLES,
+  UserAdminInputView.JSON_PROPERTY_ENABLED
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-22T15:30:33.297029192Z[Etc/UTC]", comments = "Generator version: 7.10.0")
-public class UserMeView {
+public class UserAdminInputView {
   public static final String JSON_PROPERTY_USERNAME = "username";
   @javax.annotation.Nullable
   private String username;
+
+  public static final String JSON_PROPERTY_PASSWORD = "password";
+  @javax.annotation.Nullable
+  private String password;
 
   public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
   @javax.annotation.Nullable
@@ -86,18 +89,14 @@ public class UserMeView {
   @javax.annotation.Nullable
   private List<RolesEnum> roles = new ArrayList<>();
 
-  public static final String JSON_PROPERTY_CREATED_ON = "createdOn";
+  public static final String JSON_PROPERTY_ENABLED = "enabled";
   @javax.annotation.Nullable
-  private OffsetDateTime createdOn;
+  private Boolean enabled;
 
-  public static final String JSON_PROPERTY_LAST_LOGIN = "lastLogin";
-  @javax.annotation.Nullable
-  private OffsetDateTime lastLogin;
-
-  public UserMeView() {
+  public UserAdminInputView() {
   }
 
-  public UserMeView username(@javax.annotation.Nullable String username) {
+  public UserAdminInputView username(@javax.annotation.Nullable String username) {
     
     this.username = username;
     return this;
@@ -123,7 +122,33 @@ public class UserMeView {
   }
 
 
-  public UserMeView displayName(@javax.annotation.Nullable String displayName) {
+  public UserAdminInputView password(@javax.annotation.Nullable String password) {
+    
+    this.password = password;
+    return this;
+  }
+
+  /**
+   * Get password
+   * @return password
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PASSWORD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getPassword() {
+    return password;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_PASSWORD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPassword(@javax.annotation.Nullable String password) {
+    this.password = password;
+  }
+
+
+  public UserAdminInputView displayName(@javax.annotation.Nullable String displayName) {
     
     this.displayName = displayName;
     return this;
@@ -149,13 +174,13 @@ public class UserMeView {
   }
 
 
-  public UserMeView roles(@javax.annotation.Nullable List<RolesEnum> roles) {
+  public UserAdminInputView roles(@javax.annotation.Nullable List<RolesEnum> roles) {
     
     this.roles = roles;
     return this;
   }
 
-  public UserMeView addRolesItem(RolesEnum rolesItem) {
+  public UserAdminInputView addRolesItem(RolesEnum rolesItem) {
     if (this.roles == null) {
       this.roles = new ArrayList<>();
     }
@@ -183,55 +208,29 @@ public class UserMeView {
   }
 
 
-  public UserMeView createdOn(@javax.annotation.Nullable OffsetDateTime createdOn) {
+  public UserAdminInputView enabled(@javax.annotation.Nullable Boolean enabled) {
     
-    this.createdOn = createdOn;
+    this.enabled = enabled;
     return this;
   }
 
   /**
-   * Get createdOn
-   * @return createdOn
+   * Get enabled
+   * @return enabled
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_CREATED_ON)
+  @JsonProperty(JSON_PROPERTY_ENABLED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public OffsetDateTime getCreatedOn() {
-    return createdOn;
+  public Boolean getEnabled() {
+    return enabled;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CREATED_ON)
+  @JsonProperty(JSON_PROPERTY_ENABLED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCreatedOn(@javax.annotation.Nullable OffsetDateTime createdOn) {
-    this.createdOn = createdOn;
-  }
-
-
-  public UserMeView lastLogin(@javax.annotation.Nullable OffsetDateTime lastLogin) {
-    
-    this.lastLogin = lastLogin;
-    return this;
-  }
-
-  /**
-   * Get lastLogin
-   * @return lastLogin
-   */
-  @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_LAST_LOGIN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public OffsetDateTime getLastLogin() {
-    return lastLogin;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_LAST_LOGIN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLastLogin(@javax.annotation.Nullable OffsetDateTime lastLogin) {
-    this.lastLogin = lastLogin;
+  public void setEnabled(@javax.annotation.Nullable Boolean enabled) {
+    this.enabled = enabled;
   }
 
 
@@ -243,28 +242,28 @@ public class UserMeView {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserMeView userMeView = (UserMeView) o;
-    return Objects.equals(this.username, userMeView.username) &&
-        Objects.equals(this.displayName, userMeView.displayName) &&
-        Objects.equals(this.roles, userMeView.roles) &&
-        Objects.equals(this.createdOn, userMeView.createdOn) &&
-        Objects.equals(this.lastLogin, userMeView.lastLogin);
+    UserAdminInputView userAdminInputView = (UserAdminInputView) o;
+    return Objects.equals(this.username, userAdminInputView.username) &&
+        Objects.equals(this.password, userAdminInputView.password) &&
+        Objects.equals(this.displayName, userAdminInputView.displayName) &&
+        Objects.equals(this.roles, userAdminInputView.roles) &&
+        Objects.equals(this.enabled, userAdminInputView.enabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, displayName, roles, createdOn, lastLogin);
+    return Objects.hash(username, password, displayName, roles, enabled);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserMeView {\n");
+    sb.append("class UserAdminInputView {\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
-    sb.append("    createdOn: ").append(toIndentedString(createdOn)).append("\n");
-    sb.append("    lastLogin: ").append(toIndentedString(lastLogin)).append("\n");
+    sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("}");
     return sb.toString();
   }

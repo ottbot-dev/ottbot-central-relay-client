@@ -38,7 +38,7 @@ import dev.ottbot.centralrelay.auth.ApiKeyAuth;
 import dev.ottbot.centralrelay.ApiResponseDecoder;
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-01T20:07:32.319323780Z[Etc/UTC]", comments = "Generator version: 7.10.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-22T15:30:33.297029192Z[Etc/UTC]", comments = "Generator version: 7.10.0")
 public class ApiClient {
   private static final Logger log = Logger.getLogger(ApiClient.class.getName());
 

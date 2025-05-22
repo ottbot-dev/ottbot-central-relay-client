@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   OttbotReleaseView.JSON_PROPERTY_DOWNLOAD_URL,
   OttbotReleaseView.JSON_PROPERTY_RELEASE_CHANNEL
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-01T20:07:32.319323780Z[Etc/UTC]", comments = "Generator version: 7.10.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-22T15:30:33.297029192Z[Etc/UTC]", comments = "Generator version: 7.10.0")
 public class OttbotReleaseView {
   public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nullable
@@ -59,11 +59,19 @@ public class OttbotReleaseView {
   public enum ServiceEnum {
     ENGINE_SERVER(String.valueOf("ENGINE_SERVER")),
     
+    ENGINE_SERVER_CONFIG(String.valueOf("ENGINE_SERVER_CONFIG")),
+    
     CONFIG_SERVER(String.valueOf("CONFIG_SERVER")),
+    
+    CONFIG_SERVER_CONFIG(String.valueOf("CONFIG_SERVER_CONFIG")),
     
     HEADSET_APP(String.valueOf("HEADSET_APP")),
     
-    ANDROID_APP(String.valueOf("ANDROID_APP"));
+    ANDROID_APP(String.valueOf("ANDROID_APP")),
+    
+    PI_SERVER_IMAGE(String.valueOf("PI_SERVER_IMAGE")),
+    
+    PI_ZERO_IMAGE(String.valueOf("PI_ZERO_IMAGE"));
 
     private String value;
 

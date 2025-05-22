@@ -3,7 +3,7 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-- description: production server
+- description: Generated server url
   url: https://central-relay.ottbot.dev
 paths:
   /data/users/me:
@@ -20,6 +20,198 @@ paths:
       - me-controller
       x-accepts:
       - '*/*'
+    put:
+      operationId: updateMe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMeInputView'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserMeView'
+          description: OK
+      tags:
+      - me-controller
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /admin/users/{id}:
+    delete:
+      operationId: deleteUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      tags:
+      - user-controller
+      x-accepts:
+      - application/json
+    get:
+      operationId: getUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserAdminView'
+          description: OK
+      tags:
+      - user-controller
+      x-accepts:
+      - '*/*'
+    put:
+      operationId: updateUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAdminInputView'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserAdminView'
+          description: OK
+      tags:
+      - user-controller
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /admin/release:
+    post:
+      operationId: createRelease
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OttbotReleaseView'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OttbotReleaseView'
+          description: OK
+      tags:
+      - ottbot-release-controller
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+    put:
+      operationId: updateRelease
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OttbotReleaseView'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OttbotReleaseView'
+          description: OK
+      tags:
+      - ottbot-release-controller
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /admin/users:
+    get:
+      operationId: getUsers
+      parameters:
+      - explode: true
+        in: query
+        name: pageable
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageViewUserAdminView'
+          description: OK
+      tags:
+      - user-controller
+      x-accepts:
+      - '*/*'
+    post:
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAdminInputView'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserAdminView'
+          description: OK
+      tags:
+      - user-controller
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /data/release:
+    get:
+      operationId: listReleases
+      parameters:
+      - explode: true
+        in: query
+        name: pageable
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageViewOttbotReleaseView'
+          description: OK
+      tags:
+      - ottbot-release-controller
+      x-accepts:
+      - '*/*'
   /data/release/{ottBotService}/{channel}:
     get:
       operationId: getReleaseVersion
@@ -31,9 +223,13 @@ paths:
         schema:
           enum:
           - ENGINE_SERVER
+          - ENGINE_SERVER_CONFIG
           - CONFIG_SERVER
+          - CONFIG_SERVER_CONFIG
           - HEADSET_APP
           - ANDROID_APP
+          - PI_SERVER_IMAGE
+          - PI_ZERO_IMAGE
           type: string
         style: simple
       - explode: false
@@ -83,8 +279,38 @@ paths:
       - ottbot-release-controller
       x-accepts:
       - '*/*'
+  /admin/release/{id}:
+    delete:
+      operationId: deleteRelease
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      tags:
+      - ottbot-release-controller
+      x-accepts:
+      - application/json
 components:
   schemas:
+    UserMeInputView:
+      example:
+        password: password
+        displayName: displayName
+        username: username
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        displayName:
+          type: string
     UserMeView:
       example:
         lastLogin: 2000-01-23T04:56:07.000+00:00
@@ -112,6 +338,64 @@ components:
         lastLogin:
           format: date-time
           type: string
+    UserAdminInputView:
+      example:
+        password: password
+        displayName: displayName
+        roles:
+        - ADMIN
+        - ADMIN
+        enabled: true
+        username: username
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        displayName:
+          type: string
+        roles:
+          items:
+            enum:
+            - ADMIN
+            - USER
+            type: string
+          type: array
+        enabled:
+          type: boolean
+    UserAdminView:
+      example:
+        lastLogin: 2000-01-23T04:56:07.000+00:00
+        displayName: displayName
+        roles:
+        - ADMIN
+        - ADMIN
+        id: id
+        createdOn: 2000-01-23T04:56:07.000+00:00
+        enabled: true
+        username: username
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        displayName:
+          type: string
+        roles:
+          items:
+            enum:
+            - ADMIN
+            - USER
+            type: string
+          type: array
+        createdOn:
+          format: date-time
+          type: string
+        lastLogin:
+          format: date-time
+          type: string
+        enabled:
+          type: boolean
     OttbotReleaseView:
       example:
         releaseChannel: releaseChannel
@@ -133,12 +417,108 @@ components:
         service:
           enum:
           - ENGINE_SERVER
+          - ENGINE_SERVER_CONFIG
           - CONFIG_SERVER
+          - CONFIG_SERVER_CONFIG
           - HEADSET_APP
           - ANDROID_APP
+          - PI_SERVER_IMAGE
+          - PI_ZERO_IMAGE
           type: string
         downloadUrl:
           type: string
         releaseChannel:
           type: string
+    Pageable:
+      properties:
+        page:
+          format: int32
+          minimum: 0
+          type: integer
+        size:
+          format: int32
+          minimum: 1
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+    PageViewOttbotReleaseView:
+      example:
+        pageNumber: 0
+        hasNextPage: true
+        totalPages: 1
+        totalCount: 6
+        content:
+        - releaseChannel: releaseChannel
+          service: ENGINE_SERVER
+          name: name
+          downloadUrl: downloadUrl
+          description: description
+          id: id
+          version: version
+        - releaseChannel: releaseChannel
+          service: ENGINE_SERVER
+          name: name
+          downloadUrl: downloadUrl
+          description: description
+          id: id
+          version: version
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/OttbotReleaseView'
+          type: array
+        hasNextPage:
+          type: boolean
+        pageNumber:
+          format: int64
+          type: integer
+        totalCount:
+          format: int64
+          type: integer
+        totalPages:
+          format: int64
+          type: integer
+    PageViewUserAdminView:
+      example:
+        pageNumber: 0
+        hasNextPage: true
+        totalPages: 1
+        totalCount: 6
+        content:
+        - lastLogin: 2000-01-23T04:56:07.000+00:00
+          displayName: displayName
+          roles:
+          - ADMIN
+          - ADMIN
+          id: id
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          enabled: true
+          username: username
+        - lastLogin: 2000-01-23T04:56:07.000+00:00
+          displayName: displayName
+          roles:
+          - ADMIN
+          - ADMIN
+          id: id
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          enabled: true
+          username: username
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/UserAdminView'
+          type: array
+        hasNextPage:
+          type: boolean
+        pageNumber:
+          format: int64
+          type: integer
+        totalCount:
+          format: int64
+          type: integer
+        totalPages:
+          format: int64
+          type: integer
 

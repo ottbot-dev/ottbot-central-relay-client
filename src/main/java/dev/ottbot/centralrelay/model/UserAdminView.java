@@ -28,17 +28,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * UserMeView
+ * UserAdminView
  */
 @JsonPropertyOrder({
-  UserMeView.JSON_PROPERTY_USERNAME,
-  UserMeView.JSON_PROPERTY_DISPLAY_NAME,
-  UserMeView.JSON_PROPERTY_ROLES,
-  UserMeView.JSON_PROPERTY_CREATED_ON,
-  UserMeView.JSON_PROPERTY_LAST_LOGIN
+  UserAdminView.JSON_PROPERTY_ID,
+  UserAdminView.JSON_PROPERTY_USERNAME,
+  UserAdminView.JSON_PROPERTY_DISPLAY_NAME,
+  UserAdminView.JSON_PROPERTY_ROLES,
+  UserAdminView.JSON_PROPERTY_CREATED_ON,
+  UserAdminView.JSON_PROPERTY_LAST_LOGIN,
+  UserAdminView.JSON_PROPERTY_ENABLED
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-22T15:30:33.297029192Z[Etc/UTC]", comments = "Generator version: 7.10.0")
-public class UserMeView {
+public class UserAdminView {
+  public static final String JSON_PROPERTY_ID = "id";
+  @javax.annotation.Nullable
+  private String id;
+
   public static final String JSON_PROPERTY_USERNAME = "username";
   @javax.annotation.Nullable
   private String username;
@@ -94,10 +100,40 @@ public class UserMeView {
   @javax.annotation.Nullable
   private OffsetDateTime lastLogin;
 
-  public UserMeView() {
+  public static final String JSON_PROPERTY_ENABLED = "enabled";
+  @javax.annotation.Nullable
+  private Boolean enabled;
+
+  public UserAdminView() {
   }
 
-  public UserMeView username(@javax.annotation.Nullable String username) {
+  public UserAdminView id(@javax.annotation.Nullable String id) {
+    
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getId() {
+    return id;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setId(@javax.annotation.Nullable String id) {
+    this.id = id;
+  }
+
+
+  public UserAdminView username(@javax.annotation.Nullable String username) {
     
     this.username = username;
     return this;
@@ -123,7 +159,7 @@ public class UserMeView {
   }
 
 
-  public UserMeView displayName(@javax.annotation.Nullable String displayName) {
+  public UserAdminView displayName(@javax.annotation.Nullable String displayName) {
     
     this.displayName = displayName;
     return this;
@@ -149,13 +185,13 @@ public class UserMeView {
   }
 
 
-  public UserMeView roles(@javax.annotation.Nullable List<RolesEnum> roles) {
+  public UserAdminView roles(@javax.annotation.Nullable List<RolesEnum> roles) {
     
     this.roles = roles;
     return this;
   }
 
-  public UserMeView addRolesItem(RolesEnum rolesItem) {
+  public UserAdminView addRolesItem(RolesEnum rolesItem) {
     if (this.roles == null) {
       this.roles = new ArrayList<>();
     }
@@ -183,7 +219,7 @@ public class UserMeView {
   }
 
 
-  public UserMeView createdOn(@javax.annotation.Nullable OffsetDateTime createdOn) {
+  public UserAdminView createdOn(@javax.annotation.Nullable OffsetDateTime createdOn) {
     
     this.createdOn = createdOn;
     return this;
@@ -209,7 +245,7 @@ public class UserMeView {
   }
 
 
-  public UserMeView lastLogin(@javax.annotation.Nullable OffsetDateTime lastLogin) {
+  public UserAdminView lastLogin(@javax.annotation.Nullable OffsetDateTime lastLogin) {
     
     this.lastLogin = lastLogin;
     return this;
@@ -235,6 +271,32 @@ public class UserMeView {
   }
 
 
+  public UserAdminView enabled(@javax.annotation.Nullable Boolean enabled) {
+    
+    this.enabled = enabled;
+    return this;
+  }
+
+  /**
+   * Get enabled
+   * @return enabled
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ENABLED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ENABLED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setEnabled(@javax.annotation.Nullable Boolean enabled) {
+    this.enabled = enabled;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -243,28 +305,32 @@ public class UserMeView {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserMeView userMeView = (UserMeView) o;
-    return Objects.equals(this.username, userMeView.username) &&
-        Objects.equals(this.displayName, userMeView.displayName) &&
-        Objects.equals(this.roles, userMeView.roles) &&
-        Objects.equals(this.createdOn, userMeView.createdOn) &&
-        Objects.equals(this.lastLogin, userMeView.lastLogin);
+    UserAdminView userAdminView = (UserAdminView) o;
+    return Objects.equals(this.id, userAdminView.id) &&
+        Objects.equals(this.username, userAdminView.username) &&
+        Objects.equals(this.displayName, userAdminView.displayName) &&
+        Objects.equals(this.roles, userAdminView.roles) &&
+        Objects.equals(this.createdOn, userAdminView.createdOn) &&
+        Objects.equals(this.lastLogin, userAdminView.lastLogin) &&
+        Objects.equals(this.enabled, userAdminView.enabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, displayName, roles, createdOn, lastLogin);
+    return Objects.hash(id, username, displayName, roles, createdOn, lastLogin, enabled);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserMeView {\n");
+    sb.append("class UserAdminView {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    createdOn: ").append(toIndentedString(createdOn)).append("\n");
     sb.append("    lastLogin: ").append(toIndentedString(lastLogin)).append("\n");
+    sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("}");
     return sb.toString();
   }
